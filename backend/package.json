@@ -4,6 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "nodemon": "nodemon app.js",
     "start": "node app.js"
   },
   "repository": {
@@ -19,6 +20,8 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "fs": "0.0.1-security",
-    "multer": "^1.4.2"
+    "multer": "^1.4.2",
+    "nodemon": "^2.0.6",
+    "sha256": "^0.2.0"
   }
 }
