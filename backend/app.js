@@ -15,13 +15,13 @@ app.use(cors())
 const upload = multer({ dest: 'uploads/', limits: { fileSize: 5 * 1024 * 1024 } })
 
 if (!fs.existsSync(dataJson)) {
-    fs.writeFile(dataJson, '[]',function (err) {
+    fs.writeFile(dataJson, '[]', function (err) {
         if (err) throw err
         console.log('File is created successfully.')
-    }) 
+    })
 }
 
-Date.prototype.addDays = function(days) {
+Date.prototype.addDays = function (days) {
     var date = new Date(this.valueOf())
     date.setDate(date.getDate() + days)
     return date
@@ -34,15 +34,16 @@ app.post('/upload', upload.single('file'), (req, res) => {
     const buffer = fs.readFileSync(dataJson)
     var json = JSON.parse(buffer.toString())
     const newData = {
-        fileName: file.filename,
-        originalName: file.originalname,
-        fileSize: file.size,
+        file_name: file.filename,
+        original_name: file.originalname,
+        file_size: file.size,
         secret: secret,
-        downloadURL: '/download?fileName=' + file.filename,
-        deleteURL: '/delete?fileName=' + file.filename,
-        uploadDate: date,
-        expiryDate: date.addDays(7),
-        status: 'online'
+        download_URL: '/download?fileName=' + file.filename,
+        delete_URL: '/delete?fileName=' + file.filename,
+        upload_date: date,
+        expiry_date: date.addDays(7),
+        status: 'online',
+        download_count: 0
     }
     json.push(newData)
     const data = JSON.stringify(json)
